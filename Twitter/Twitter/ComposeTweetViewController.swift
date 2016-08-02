@@ -27,6 +27,7 @@ class ComposeTweetViewController: UIViewController {
     @IBAction func onButton(sender: AnyObject) {
         
         print(text.text)
+        //TwitterClient.sharedInstance.publishTweet(text.text)
         TwitterClient.sharedInstance.postTweet(text.text)
         
         

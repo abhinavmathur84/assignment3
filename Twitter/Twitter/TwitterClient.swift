@@ -44,12 +44,28 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     
+    func publishTweet(text: String) {
+        // Warning: this'll create a live tweet with the given text on behalf of the current user!
+        if(text == "") {
+            return;
+        }
+       
+        let params = ["status": "abhinav mathur", "in_reply_to_status_id": 123];
+        POST("1.1/statuses/update.json", parameters: params, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let tweet = Tweet(dictionary: response as! NSDictionary);
+            //success(tweet);
+        }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+            
+        }
+    }
+    
     func postTweet(status:String) {
         //https://api.twitter.com/1.1/statuses/update.json
-        let obj = ["status":"hello world"]
+        let obj = ["status":status]
         
         
       // POST("1.1/statuses/update.json", parameters: obj, success: nil, failure: nil)
+    
         POST("1.1/statuses/update.json", parameters: obj, success: { (task:NSURLSessionTask, response:AnyObject?)-> Void in
             print("success")
             }, failure: nil)
